@@ -18,7 +18,7 @@
 /*
  * 2023/03/25
  * First keymap with all three layers
- * Mod top on thumbs
+ * Mod tap on thumbs
  */
 
 #include QMK_KEYBOARD_H
@@ -45,8 +45,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | Alt  | LGUI |LOWER | /Enter  /       \BackSp\  |Space |Delete|      |
- *                   |      |      |      |/       /         \      \ |RAISE |      |      |
+ *                   | Alt  | LGUI |RAISE | /Enter  /       \BackSp\  |Space |Delete|      |
+ *                   |      |      |      |/       /         \      \ |LOWER |      |      |
  *                   `-------------------''-------'           '------''--------------------'
  */
 
@@ -65,17 +65,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |PrvTab|NxtTab|VolDn |-------.    ,-------| Left | Down |  Up  |Right |MaxWin|      |
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
- * |      |      |      |PrvDsk|NxtDsk| Mute |-------|    |-------|ALT+Lt| PgDn | PgUp |ALT+Rt|      |      |
+ * |      |      |ShwDsk|PrvDsk|NxtDsk| Mute |-------|    |-------|ALT+Lt| PgDn | PgUp |ALT+Rt|      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | Alt  | LGUI |LOWER | /Enter  /       \Space \  |RAISE |BackSP|Delete|
- *                   |      |      |      |/       /         \      \ |      |      |      |
+ *                   | Alt  | LGUI |RAISE | /Enter  /       \BackSp\  |Space |Delete|      |
+ *                   |      |      |      |/       /         \      \ |LOWER |      |      |
  *                   `-------------------''-------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT(
   _______, _______, _______, _______,      _______,     _______,                   _______,    _______,    _______,  _______,    _______,       _______,
-  _______, _______, _______, KC_WBAK,      KC_WFWD,     KC_VOLU,                   G(KC_LEFT), G(KC_DOWN), G(KC_UP), G(KC_RGHT), G(S(KC_4)),    _______,
+  _______, _______, _______, KC_BTN4,      KC_BTN5,     KC_VOLU,                   G(KC_LEFT), G(KC_DOWN), G(KC_UP), G(KC_RGHT), G(S(KC_4)),    _______,
   _______, _______, _______, C(S(KC_TAB)), C(KC_TAB),   KC_VOLD,                   KC_LEFT,    KC_DOWN,    KC_UP,    KC_RGHT,    C(G(KC_Z)),    _______,
-  _______, _______, _______, C(KC_LEFT),   C(KC_RIGHT), KC_MUTE, _______, _______, A(KC_LEFT), KC_PGDN,    KC_PGUP,  A(KC_RGHT), _______,       _______,
+  _______, _______, KC_F11, C(KC_LEFT),   C(KC_RIGHT), KC_MUTE, _______, _______, A(KC_LEFT), KC_PGDN,    KC_PGUP,  A(KC_RGHT), _______,       _______,
 
                              _______,      _______,     _______, _______, _______,  _______,   _______,    _______
 ),
@@ -89,13 +89,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |      |  ~   |  `   |  _   |  [   |  ]   |-------|    |-------|  0   |  1   |  2   |  3   |  .   |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | Alt  | LGUI |LOWER | /Enter  /       \Space \  |RAISE |BackSP|Delete|
- *                   |      |      |      |/       /         \      \ |      |      |      |
+ *                   | Alt  | LGUI |RAISE | /Enter  /       \BackSp\  |Space |Delete|      |
+ *                   |      |      |      |/       /         \      \ |LOWER |      |      |
  *                   `-------------------''-------'           '------''--------------------'
  */
 
 [_RAISE] = LAYOUT(
-  MO(_ADJUST), _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______,
+  TG(_ADJUST), _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______,
   _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                     KC_PLUS, KC_7,    KC_8,    KC_9,    KC_PAST, KC_PEQL,
   _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,                     KC_MINS, KC_4,    KC_5,    KC_6,    KC_PSLS, KC_PIPE,
   _______, KC_TILD, KC_GRV,  KC_UNDS, KC_LBRC, KC_RBRC,  _______, _______,  KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,  _______,
@@ -112,12 +112,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |RGBMOD|RGBHUD|RGBSAD|RGBVAD|      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | Alt  | LGUI |LOWER | /Enter  /       \Space \  |RAISE |BackSP|Delete|
- *                   |      |      |      |/       /         \      \ |      |      |      |
+ *                   | Alt  | LGUI |RAISE | /Enter  /       \BackSp\  |Space |Delete|      |
+ *                   |      |      |      |/       /         \      \ |LOWER |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
   [_ADJUST] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  TG(_ADJUST), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
