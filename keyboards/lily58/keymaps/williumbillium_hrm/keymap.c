@@ -80,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT(
   _______, _______, _______, _______,       _______,        _______,                   _______,    _______,        _______,      _______,        _______,    _______,
-  _______, _______, _______, KC_BTN4,       KC_BTN5,        KC_VOLU,                   KC_HOME,    C(KC_END),      C(KC_HOME),   KC_END,         G(S(KC_4)), _______,
+  _______, _______, _______, KC_BTN4,       KC_BTN5,        KC_VOLU,                   KC_HOME,    C(KC_END),      C(KC_HOME),   KC_END,         KC_PSCR,    _______,
   _______, KC_LGUI, KC_LALT, KC_LCTL,       KC_LSFT,        KC_VOLD,                   KC_LEFT,    SFT_T(KC_DOWN), CTL_T(KC_UP), ALT_T(KC_RGHT), KC_LGUI,    _______,
-  _______, _______, _______, G(C(KC_LEFT)), G(C(KC_RIGHT)), KC_MUTE, _______, _______, C(KC_LEFT), KC_PGDN,        KC_PGUP,      C(KC_RGHT),     C(G(KC_Z)), _______,
+  _______, _______, _______, G(C(KC_LEFT)), G(C(KC_RIGHT)), KC_MUTE, _______, _______, C(KC_LEFT), KC_PGDN,        KC_PGUP,      C(KC_RGHT),     G(KC_UP), _______,
                              _______,       _______,        _______, _______, _______, _______,    _______,        _______
 ),
 /* RAISE
