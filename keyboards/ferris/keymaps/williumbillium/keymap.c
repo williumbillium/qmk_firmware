@@ -17,9 +17,8 @@
 #include QMK_KEYBOARD_H
 
 enum layer_number {
-  _BASE = 0,
-  _COLEMAKDH,
-  _GRAPHITE,
+  _GRAPHITE = 0,
+  _QWERTY,
   _NAV,
   _SYM,
   _FUNC,
@@ -30,7 +29,17 @@ enum layer_number {
 #define NAV_SPC LT(_NAV,KC_SPC)
 #define FUNC_ENT LT(_FUNC,KC_ENT)
 
-// BASE layer home row mods
+// GRAPHITE layer home row mods
+#define GUI_T_N ALT_T(KC_N)
+#define ALT_T_R ALT_T(KC_R)
+#define CTL_T_T CTL_T(KC_T)
+#define SFT_T_S SFT_T(KC_S)
+#define SFT_T_H SFT_T(KC_H)
+#define CTL_T_A CTL_T(KC_A)
+#define ALT_T_E ALT_T(KC_E)
+#define GUI_T_I GUI_T(KC_I)
+
+// QWERTY layer home row mods
 #define GUI_T_A GUI_T(KC_A)
 #define ALT_T_S ALT_T(KC_S)
 #define CTL_T_D CTL_T(KC_D)
@@ -39,24 +48,6 @@ enum layer_number {
 #define CTL_T_K CTL_T(KC_K)
 #define ALT_T_L ALT_T(KC_L)
 #define GUI_T_QOT GUI_T(KC_QUOT)
-
-// COLEMAKDH layer home row mods
-#define ALT_T_R ALT_T(KC_R)
-#define CTL_T_S CTL_T(KC_S)
-#define SFT_T_T SFT_T(KC_T)
-#define SFT_T_N SFT_T(KC_N)
-#define CTL_T_E CTL_T(KC_E)
-#define ALT_T_I ALT_T(KC_I)
-#define GUI_T_O GUI_T(KC_O)
-
-// GRAPHITE layer home row mods
-#define GUI_T_N ALT_T(KC_N)
-#define CTL_T_T CTL_T(KC_T)
-#define SFT_T_S SFT_T(KC_S)
-#define SFT_T_H SFT_T(KC_H)
-#define CTL_T_A CTL_T(KC_A)
-#define ALT_T_E ALT_T(KC_E)
-#define GUI_T_I GUI_T(KC_I)
 
 // NAV layer shortcuts
 #define PRV_DSK G(C(KC_LEFT))
@@ -94,22 +85,16 @@ enum layer_number {
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-	[_BASE] = LAYOUT(
-    KC_Q,      KC_W,      KC_E,      KC_R,      KC_T,                            KC_Y,      KC_U,      KC_I,      KC_O,      KC_P,
-    GUI_T_A,   ALT_T_S,   CTL_T_D,   SFT_T_F,   KC_G,                            KC_H,      SFT_T_J,   CTL_T_K,   ALT_T_L,   GUI_T_QOT,
-    KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,                            KC_N,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,
-                                                SYM_TAB,   FUNC_ENT,  KC_BSPC,   NAV_SPC),
-
-	[_COLEMAKDH] = LAYOUT(
-    KC_Q,      KC_W,      KC_F,      KC_P,      KC_B,                            KC_J,      KC_L,      KC_U,      KC_Y,      KC_QUOT,
-    GUI_T_A,   ALT_T_R,   CTL_T_S,   SFT_T_T,   KC_G,                            KC_M,      SFT_T_N,   CTL_T_E,   ALT_T_I,   GUI_T_O,
-    KC_Z,      KC_X,      KC_C,      KC_D,      KC_V,                            KC_K,      KC_H,      KC_COMM,   KC_DOT,    KC_SLSH,
-                                                KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
-
 	[_GRAPHITE] = LAYOUT(
     KC_B,      KC_L,      KC_D,      KC_W,      KC_Z,                            KC_J,      KC_F,      KC_O,      KC_U,      KC_QUOT,
     GUI_T_N,   ALT_T_R,   CTL_T_T,   SFT_T_S,   KC_G,                            KC_Y,      SFT_T_H,   CTL_T_A,   ALT_T_E,   GUI_T_I,
     KC_Q,      KC_X,      KC_M,      KC_C,      KC_V,                            KC_K,      KC_P,      KC_COMM,   KC_DOT,    KC_SLSH,
+                                                SYM_TAB,   FUNC_ENT,  KC_BSPC,   NAV_SPC),
+
+	[_QWERTY] = LAYOUT(
+    KC_Q,      KC_W,      KC_E,      KC_R,      KC_T,                            KC_Y,      KC_U,      KC_I,      KC_O,      KC_P,
+    GUI_T_A,   ALT_T_S,   CTL_T_D,   SFT_T_F,   KC_G,                            KC_H,      SFT_T_J,   CTL_T_K,   ALT_T_L,   GUI_T_QOT,
+    KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,                            KC_N,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
 
 	[_NAV] = LAYOUT(
@@ -126,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_FUNC] = LAYOUT(
     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,                           KC_NO,     KC_F7,     KC_F8,     KC_F9,     KC_F10,
-    KC_NO,     KC_NO,     KC_NO,     KC_NO,     TG(_GRAPHITE),                   KC_NO,     SFT_T_F4,  CTL_T_F5,  ALT_T_F6,  GUI_T_F11,
-    KC_NO,     KC_NO,     KC_NO,     KC_NO,     TG(_COLEMAKDH),                  KC_NO,     KC_F1,     KC_F2,     KC_F3,     KC_F12,
+    KC_NO,     KC_NO,     KC_NO,     KC_NO,     TG(_QWERTY),                     KC_NO,     SFT_T_F4,  CTL_T_F5,  ALT_T_F6,  GUI_T_F11,
+    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,                           KC_NO,     KC_F1,     KC_F2,     KC_F3,     KC_F12,
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS)
 };
