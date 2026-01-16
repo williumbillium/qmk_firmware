@@ -20,13 +20,15 @@ enum layer_number {
   _GRAPHITE = 0,
   _QWERTY,
   _NAV,
+  _NUM,
   _SYM,
   _FUNC,
 };
 
 // Thumb mods
-#define SYM_TAB LT(_SYM,KC_TAB)
+#define NUM_TAB LT(_NUM,KC_TAB)
 #define NAV_SPC LT(_NAV,KC_SPC)
+#define SYM_BSPC LT(_SYM,KC_BSPC)
 #define FUNC_ENT LT(_FUNC,KC_ENT)
 
 // GRAPHITE layer home row mods
@@ -67,7 +69,7 @@ enum layer_number {
 #define ALT_T_RGT ALT_T(KC_RGHT)
 #define GUI_T_DEL GUI_T(KC_DEL)
 
-// SYM layer home row mods
+// NUM layer home row mods
 #define GUI_T_CRC GUI_T(KC_CIRC)
 #define ALT_T_AMP ALT_T(KC_AMPR)
 #define CTL_T_AST CTL_T(KC_ASTR)
@@ -77,19 +79,95 @@ enum layer_number {
 #define ALT_T_6 ALT_T(KC_6)
 #define GUI_T_SCN GUI_T(KC_SCLN)
 
+// SYM layer home row mods
+#define CTL_T_UKP MT(MOD_LCTL, POUND_KEY) // Tap = £, Hold = CTL
+
 // FUNC layer home row mods
+#define SFT_T_UCLX SFT_T(UC_LINX)
 #define SFT_T_F4 SFT_T(KC_F4)
 #define CTL_T_F5 SFT_T(KC_F5)
 #define ALT_T_F6 SFT_T(KC_F6)
 #define GUI_T_F11 SFT_T(KC_F11)
 
 
+enum unicode_names {
+    EURO,
+    PERSV,
+    GRIM,
+    TRSJOY,
+    GRINSM,
+    OCIRC,
+    UCIRC,
+    ICIRC,
+    POUND,
+    WORRIED,
+    CRYING,
+    THUMBU,
+    GRIN,
+    AGRAVE,
+    EACUTE,
+    EGRAVE,
+    CCEDIL,
+    LDCRY,
+    FCRSSD,
+    CLAP,
+    ACIRC,
+    ECIRC,
+    LIGOE
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+    [EURO]     = 0x20AC,    // €
+    [PERSV]    = 0x1F623,   // Persevering emoji
+    [GRIM]     = 0x1F62C,   // Grimmace emoji
+    [TRSJOY]   = 0x1F602,   // Tears of joy emoji
+    [GRINSM]   = 0x1F601,   // Grinning emoji
+    [OCIRC]    = 0x00F4,    // ô
+    [UCIRC]    = 0x00FB,    // û
+    [ICIRC]    = 0x00EE,    // î
+    [POUND]    = 0x00A3,    // £
+    [WORRIED]  = 0x1F61F,   // Worried emoji
+    [CRYING]   = 0x1F622,   // Crying emoji
+    [THUMBU]   = 0x1F44D,   // Thumbs up emoji
+    [GRIN]     = 0x1F600,   // Grinning emoji
+    [AGRAVE]   = 0x00E0,    // à
+    [EACUTE]   = 0x00E9,    // é
+    [EGRAVE]   = 0x00E8,    // è
+    [CCEDIL]   = 0x00E7,    // ç
+    [LDCRY]    = 0x1F62D,   // Loudly crying emoji
+    [FCRSSD]   = 0x1F91E,   // Fingers crossed emoji
+    [CLAP]     = 0x1F44F,   // Clapping hands
+    [ACIRC]    = 0x00E2,    // â
+    [ECIRC]    = 0x00EA,    // ê
+    [LIGOE]    = 0x0153     // œ
+};
+
+// Only need these two if we are going to use MOD TAP
+enum custom_keycodes {
+    EURO_KEY = SAFE_RANGE,  // tap = €
+    POUND_KEY  // tap = £
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case EURO_KEY:
+                send_unicode_string("0x20AB"); // €
+                return false; // skip further processing
+            case POUND_KEY:
+                send_unicode_string("0x00A2"); // £
+                return false; // skip further processing
+        }
+    }
+    return true;
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_GRAPHITE] = LAYOUT(
     KC_B,      KC_L,      KC_D,      KC_W,      KC_Z,                            KC_J,      KC_F,      KC_O,      KC_U,      KC_QUOT,
     GUI_T_N,   ALT_T_R,   CTL_T_T,   SFT_T_S,   KC_G,                            KC_Y,      SFT_T_H,   CTL_T_A,   ALT_T_E,   GUI_T_I,
     KC_Q,      KC_X,      KC_M,      KC_C,      KC_V,                            KC_K,      KC_P,      KC_COMM,   KC_DOT,    KC_SLSH,
-                                                SYM_TAB,   FUNC_ENT,  KC_BSPC,   NAV_SPC),
+                                                NUM_TAB,   FUNC_ENT,  SYM_BSPC,  NAV_SPC),
 
 	[_QWERTY] = LAYOUT(
     KC_Q,      KC_W,      KC_E,      KC_R,      KC_T,                            KC_Y,      KC_U,      KC_I,      KC_O,      KC_P,
@@ -103,15 +181,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,   KC_TRNS,   PRV_DSK,   NXT_DSK,   KC_MUTE,                         CTL_LEFT,  KC_PGDN,   KC_PGUP,   CTL_RGHT,  G(KC_UP),
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
 
-	[_SYM] = LAYOUT(
+	[_NUM] = LAYOUT(
     KC_EXLM,   KC_AT,     KC_HASH,   KC_DLR,    KC_PERC,                         KC_PPLS,   KC_7,      KC_8,      KC_9,      KC_EQL,
     KC_CIRC,   KC_AMPR,   KC_ASTR,   KC_LPRN,   KC_RPRN,                         KC_MINS,   SFT_T_4,   CTL_T_5,   ALT_T_6,   GUI_T_SCN,
     KC_TILD,   KC_GRV,    KC_UNDS,   KC_LBRC,   KC_RBRC,                         KC_0,      KC_1,      KC_2,      KC_3,      KC_BSLS,
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
 
+	[_SYM] = LAYOUT(
+    KC_NO,     KC_NO,     UM(EURO),  UM(PERSV), UM(GRIM),                        UM(TRSJOY),UM(GRINSM),  UM(OCIRC), UM(UCIRC), UM(ICIRC),
+    KC_NO,     KC_NO,     UM(POUND), UM(WORRIED),UM(CRYING),                     UM(THUMBU),UM(GRIN),  UM(AGRAVE),UM(EACUTE),UM(EGRAVE),
+    KC_NO,     KC_NO,     KC_NO,     UM(CCEDIL), UM(LDCRY),                      UM(FCRSSD),UM(CLAP),  UM(ACIRC), UM(ECIRC), UM(LIGOE),
+                                                KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
+
 	[_FUNC] = LAYOUT(
     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,                           KC_NO,     KC_F7,     KC_F8,     KC_F9,     KC_F10,
-    KC_NO,     KC_NO,     KC_NO,     KC_NO,     TG(_QWERTY),                     KC_NO,     SFT_T_F4,  CTL_T_F5,  ALT_T_F6,  GUI_T_F11,
-    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,                           KC_NO,     KC_F1,     KC_F2,     KC_F3,     KC_F12,
+    KC_NO,     KC_NO,     KC_NO,     UC_LINX,   TG(_QWERTY),                     KC_NO,     SFT_T_F4,  CTL_T_F5,  ALT_T_F6,  GUI_T_F11,
+    KC_NO,     KC_NO,     KC_NO,     UC_WINC,   KC_NO,                           KC_NO,     KC_F1,     KC_F2,     KC_F3,     KC_F12,
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS)
 };
+

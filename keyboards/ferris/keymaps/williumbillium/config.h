@@ -21,3 +21,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 200
 //#define PERMISSIVE_HOLD
 
+// Notes that UNICODE_MODE_WINCOMPOSE requires the 3rd party WinCompose application
+#define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX, UNICODE_MODE_WINCOMPOSE
