@@ -92,54 +92,68 @@ enum layer_number {
 
 enum unicode_names {
     EURO,
-    PERSV,
-    GRIM,
-    TRSJOY,
-    GRINSM,
+    FCRSSD,
+    POINTU,
+    WORRIED,
+    RSDEYE,
+    HUNDRED,
+    SMILE,
     OCIRC,
     UCIRC,
-    ICIRC,
+    LIGOE,
     POUND,
-    WORRIED,
-    CRYING,
+    FLDHND,
     THUMBU,
-    GRIN,
+    CRYING,
+    GRIM,
+    FIRE,
+    SMLEYE,
     AGRAVE,
-    EACUTE,
     EGRAVE,
+    ICIRC,
     CCEDIL,
-    LDCRY,
-    FCRSSD,
     CLAP,
+    POINTD,
+    LDCRY,
+    PEEK,
+    PARTY,
+    TRSJOY,
     ACIRC,
     ECIRC,
-    LIGOE
+    EACUTE
 };
 
 const uint32_t PROGMEM unicode_map[] = {
     [EURO]     = 0x20AC,    // €
-    [PERSV]    = 0x1F623,   // Persevering emoji
-    [GRIM]     = 0x1F62C,   // Grimmace emoji
-    [TRSJOY]   = 0x1F602,   // Tears of joy emoji
-    [GRINSM]   = 0x1F601,   // Grinning emoji
+    [FCRSSD]   = 0x1F91E,   // Fingers crossed emoji
+    [POINTU]   = 0x1F446,   // Backhand index pointing up
+    [WORRIED]  = 0x1F61F,   // Worried emoji
+    [RSDEYE]   = 0x1F928,   // Face with raised eyebrow
+    [HUNDRED]  = 0x1F4AF,   // Hundred points
+    [SMILE]    = 0x1F642,   // Slightly smiling face
     [OCIRC]    = 0x00F4,    // ô
     [UCIRC]    = 0x00FB,    // û
-    [ICIRC]    = 0x00EE,    // î
+    [LIGOE]    = 0x0153,    // œ
     [POUND]    = 0x00A3,    // £
-    [WORRIED]  = 0x1F61F,   // Worried emoji
-    [CRYING]   = 0x1F622,   // Crying emoji
+    [FLDHND]   = 0x1F64F,   // Folded hands
     [THUMBU]   = 0x1F44D,   // Thumbs up emoji
-    [GRIN]     = 0x1F600,   // Grinning emoji
+    [CRYING]   = 0x1F622,   // Crying emoji
+    [GRIM]     = 0x1F62C,   // Grimmace emoji
+    [FIRE]     = 0x1F525,   // Fire 
+    [SMLEYE]   = 0x1F60A,   // Smiling face with smiling eyes
     [AGRAVE]   = 0x00E0,    // à
-    [EACUTE]   = 0x00E9,    // é
     [EGRAVE]   = 0x00E8,    // è
+    [ICIRC]    = 0x00EE,    // î
     [CCEDIL]   = 0x00E7,    // ç
-    [LDCRY]    = 0x1F62D,   // Loudly crying emoji
-    [FCRSSD]   = 0x1F91E,   // Fingers crossed emoji
     [CLAP]     = 0x1F44F,   // Clapping hands
+    [POINTD]   = 0x1F447,   // Backhand index pointing down
+    [LDCRY]    = 0x1F62D,   // Loudly crying emoji
+    [PEEK]     = 0x1FAE3,   // Face with peeking eye
+    [PARTY]    = 0x1F389,   // Party popper
+    [TRSJOY]   = 0x1F602,   // Tears of joy emoji
     [ACIRC]    = 0x00E2,    // â
     [ECIRC]    = 0x00EA,    // ê
-    [LIGOE]    = 0x0153     // œ
+    [EACUTE]   = 0x00E9     // é
 };
 
 // Only need these two if we are going to use MOD TAP
@@ -188,14 +202,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
 
 	[_SYM] = LAYOUT(
-    KC_NO,     KC_NO,     UM(EURO),  UM(PERSV), UM(GRIM),                        UM(TRSJOY),UM(GRINSM),  UM(OCIRC), UM(UCIRC), UM(ICIRC),
-    KC_NO,     KC_NO,     UM(POUND), UM(WORRIED),UM(CRYING),                     UM(THUMBU),UM(GRIN),  UM(AGRAVE),UM(EACUTE),UM(EGRAVE),
-    KC_NO,     KC_NO,     KC_NO,     UM(CCEDIL), UM(LDCRY),                      UM(FCRSSD),UM(CLAP),  UM(ACIRC), UM(ECIRC), UM(LIGOE),
+    UM(EURO),  UM(FCRSSD),UM(POINTU),UM(WORRIED),UM(RSDEYE),                     UM(HUNDRED),UM(SMILE), UM(OCIRC), UM(UCIRC), UM(LIGOE),
+    UM(POUND), UM(FLDHND),UM(THUMBU),UM(CRYING),UM(GRIM),                        UM(FIRE),   UM(SMLEYE),UM(AGRAVE),UM(EGRAVE),UM(ICIRC),
+    UM(CCEDIL),UM(CLAP),  UM(POINTD),UM(LDCRY), UM(PEEK),                        UM(PARTY),  UM(TRSJOY),UM(ACIRC), UM(ECIRC), UM(EACUTE),
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
 
 	[_FUNC] = LAYOUT(
     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,                           KC_NO,     KC_F7,     KC_F8,     KC_F9,     KC_F10,
-    KC_NO,     KC_NO,     KC_NO,     UC_LINX,   TG(_QWERTY),                     KC_NO,     SFT_T_F4,  CTL_T_F5,  ALT_T_F6,  GUI_T_F11,
+    KC_NO,     KC_NO,     KC_NO,     UC_LINX,   TG(_QWERTY),                     KC_CAPS,   SFT_T_F4,  CTL_T_F5,  ALT_T_F6,  GUI_T_F11,
     KC_NO,     KC_NO,     KC_NO,     UC_WINC,   KC_NO,                           KC_NO,     KC_F1,     KC_F2,     KC_F3,     KC_F12,
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS)
 };
