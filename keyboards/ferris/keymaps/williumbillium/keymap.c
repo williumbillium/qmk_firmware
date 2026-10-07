@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
 
 	[_NAV] = LAYOUT(
-    KC_TRNS,   KC_TRNS,   KC_BTN4,   KC_BTN5,   KC_VOLU,                         KC_HOME,   CTL_END,   CTL_HOME,  KC_END,    KC_PSCR,
+    KC_TRNS,   KC_TRNS,   MS_BTN4,   MS_BTN5,   KC_VOLU,                         KC_HOME,   CTL_END,   CTL_HOME,  KC_END,    KC_PSCR,
     GUI_T_ESC, ALT_T_RWD, CTL_T_PLY, SFT_T_FFD, KC_VOLD,                         KC_LEFT,   SFT_T_DWN, CTL_T_UP,  ALT_T_RGT, GUI_T_DEL,
     KC_TRNS,   KC_TRNS,   PRV_DSK,   NXT_DSK,   KC_MUTE,                         CTL_LEFT,  KC_PGDN,   KC_PGUP,   CTL_RGHT,  G(KC_UP),
                                                 KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS),
