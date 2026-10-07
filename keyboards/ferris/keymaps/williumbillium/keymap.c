@@ -32,7 +32,7 @@ enum layer_number {
 #define FUNC_ENT LT(_FUNC,KC_ENT)
 
 // GRAPHITE layer home row mods
-#define GUI_T_N ALT_T(KC_N)
+#define GUI_T_N GUI_T(KC_N)
 #define ALT_T_R ALT_T(KC_R)
 #define CTL_T_T CTL_T(KC_T)
 #define SFT_T_S SFT_T(KC_S)
